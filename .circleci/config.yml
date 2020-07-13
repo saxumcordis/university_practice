@@ -1,0 +1,26 @@
+# Python CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+#
+version: 3
+jobs:
+  build:  # job's name; every .circleci/config.yml file must have a job named build
+    docker:  # executor of the underlying technology
+      # specify the version you desire here
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
+      - image: continuumio/anaconda3
+    steps:
+      - checkout
+      - restore_cache: # restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run
+          key: deps1-{{ .Branch }}-{{ checksum "myenv.yml" }}
+      - run: 
+          command: |
+            chmod +x run.sh
+            ./run.sh
+      - save_cache: # special step to save dependency cache
+          key: deps1-{{ .Branch }}-{{ checksum "myenv.yml" }}
+          paths:
+            - "venv"
+      - store_artifacts:
+          path: ./task_0.html
+          destination: test-reports
