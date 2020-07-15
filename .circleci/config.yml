@@ -22,5 +22,5 @@ jobs:
           paths:
             - "venv"
       - store_artifacts:
-          path: ./task_0.html
+          path: ./Index.html
           destination: test-reports
