@@ -3,6 +3,7 @@ version: 3
 jobs:
   build:
     docker:
+    - image: circleci/python:3.6.4
     steps:
       - checkout
       - restore_cache: 
