@@ -6,14 +6,18 @@ jobs:
     - image: circleci/python:3.6.4
     steps:
       - checkout
-      - restore_cache: 
-          key: deps1-{{ .Branch }}-{{ checksum "myenv.yml" }}
+      - run: sudo pip install jupyter_client
+    - run: sudo pip install nbconvert
+    - run: sudo pip install numpy
+    - run: sudo pip install matplotlib
+    - run: sudo pip install sklearn
+    - run: sudo python3 -m pip install ipykernel
+    - run: sudo python3 -m ipykernel install --user
+    - run: jupyter-nbconvert --execute ./Notebook.ipynb
       - run: 
           command: |
             chmod +x run.sh
             ./run.sh
-      - save_cache: # special step to save dependency cache
-          key: deps1-{{ .Branch }}-{{ checksum "myenv.yml" }}
           paths:
             - "venv"
       - store_artifacts:
