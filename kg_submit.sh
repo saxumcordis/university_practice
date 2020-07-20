@@ -1,1 +1,1 @@
-kaggle competitions submic -c titanic -f submission.csv -m "New ver"
+kaggle competitions submit -c titanic -f submission.csv -m "New ver"
