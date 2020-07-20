@@ -1,1 +1,1 @@
-kaggle competitions download -c titanik
+kaggle competitions download -c titanic
